@@ -38,12 +38,21 @@ app.post('/upload',(req,res)=>{
             return value.result;
           }
         
-        run().then(resp=>{
-            res.json({fileName: file.name, filePath: `/uploads/${file.name}`, code : `${resp}`})
-        }).catch(error => {
+        run()
+          .then((resp) => {
+            res.json({
+              fileName: file.name,
+              filePath: `/uploads/${file.name}`,
+              code: `${resp}`,
+            });
+          })
+          .catch((error) => {
             console.log(error);
-            res.json({error: "Please select an image with valid QR code",filePath: `/uploads/${file.name}`});
-        });
+            res.json({
+              error: "Please select an image with valid QR code",
+              filePath: `/uploads/${file.name}`,
+            });
+          });
         
         
     });
