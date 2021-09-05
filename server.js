@@ -1,6 +1,7 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const QRReader = require('qrcode-reader');
+const jimp = require('jimp');
 const fs = require('fs');
 
 const app = express();
@@ -28,7 +29,7 @@ app.post('/upload',(req,res)=>{
         }
 
         async function run() {
-            const img = file; //await jimp.read(path);
+            const img = await jimp.read(path);
             const qr = new QRReader();
             const value = await new Promise((resolve, reject) => {
               qr.callback = (err, v) => err != null ? reject(err) : resolve(v);
